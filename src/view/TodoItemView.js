@@ -11,26 +11,26 @@ export class TodoItemView{
   createElement(todoItem, { onUpdateTodo, onDeleteTodo }) {
     const todoItemElement = todoItem.completed
     ? element`<li><input type="checkbox" class="checkbox" checked>
-                          <s>${item.title}</s>
+                          <s>${todoItem.title}</s>
                           <button class="delete">x</button>
                         </li>`
     : element`<li><input type="checkbox" class="checkbox">
-                          ${item.title}
+                          ${todoItem.title}
                           <button class="delete">x</button>
                         </li>`;
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
     inputCheckboxElement.addEventListener("change", () => {
       //指定したTodoアイテムの完了状態を反転させる
       onUpdateTodo({
-        id: item.id,
-        completed: !item.completed
+        id: todoItem.id,
+        completed: !todoItem.completed
       });
     });
     // 削除ボタン(x)がクリックされたときにTodoListModelからアイテムを削除する
     const deleteButtonElement = todoItemElement.querySelector(".delete");
     deleteButtonElement.addEventListener("click", () => {
         onDeleteTodo({
-            id: item.id
+            id: todoItem.id
         });
     });
     // 作成したTodoアイテムのHTML要素を返す
